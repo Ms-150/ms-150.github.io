@@ -77,6 +77,7 @@ const redis2 = new Redis({
   port: 6379,
 });
 
+// 订阅频道
 redis.subscribe("news").then((err, count) => {
   if (err) {
     console.error("Failed to subscribe:", err);
@@ -84,11 +85,12 @@ redis.subscribe("news").then((err, count) => {
     console.log(`Subscribed to ${count} channel(s).`);
   }
 });
-
+// 监听消息
 redis.on("message", (channel, message) => {
   console.log(channel, message, "--- I am redis");
 });
 
+// 发布消息
 redis2.publish("news", "I am redis2");
 redis2.publish("news", "I am redis2");
 ```

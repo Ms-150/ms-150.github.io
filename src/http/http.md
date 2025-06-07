@@ -177,39 +177,40 @@ HTTP 版本 状态码 状态消息
 
 #### 状态码
 
-| 状态码 | 状态信息              | 解释                               |
-| ------ | --------------------- | ---------------------------------- |
-| `200`  | OK                    | 请求成功，服务器返回了请求的资源   |
-| `201`  | Created               | 请求成功，服务器创建了新的资源     |
-| `204`  | No Content            | 请求成功，但服务器没有返回任何内容 |
-| `301`  | Moved Permanently     | 资源已永久移动到新位置             |
-| `400`  | Bad Request           | 请求无效，服务器无法理解           |
-| `401`  | Unauthorized          | 需要身份验证                       |
-| `403`  | Forbidden             | 服务器拒绝执行请求                 |
-| `404`  | Not Found             | 请求的资源未找到                   |
-| `500`  | Internal Server Error | 服务器内部错误                     |
-| `503`  | Service Unavailable   | 服务不可用，服务器暂时无法处理请求 |
+| 状态码 | 状态信息              | 解释                                               |
+| ------ | --------------------- | -------------------------------------------------- |
+| `200`  | OK                    | 请求成功，服务器返回了请求的资源                   |
+| `201`  | Created               | 请求成功，服务器创建了新的资源                     |
+| `204`  | No Content            | 请求成功，但服务器没有返回任何内容                 |
+| `301`  | Moved Permanently     | 资源已永久移动到新位置                             |
+| `304`  | Not Modified          | 自从上次请求后，请求的资源没有修改（用于协商缓存） |
+| `400`  | Bad Request           | 请求无效，服务器无法理解                           |
+| `401`  | Unauthorized          | 需要身份验证                                       |
+| `403`  | Forbidden             | 服务器拒绝执行请求                                 |
+| `404`  | Not Found             | 请求的资源未找到                                   |
+| `500`  | Internal Server Error | 服务器内部错误                                     |
+| `503`  | Service Unavailable   | 服务不可用，服务器暂时无法处理请求                 |
 
 ### 响应头
 
-| 响应头           | 描述                                             | 示例值                                                  |
-| ---------------- | ------------------------------------------------ | ------------------------------------------------------- |
-| Content-Type     | 指示响应主体的媒体类型                           | Content-Type: text/html; application/json;charset=UTF-8 |
-| Content-Length   | 表示响应主体的长度（以字节为单位）               | Content-Length: 1234                                    |
-| Server           | 提供有关服务器的软件信息                         | Server: Apache/2.4.41 (Ubuntu)                          |
-| Date             | 指定响应消息的发送日期和时间                     | Date: Fri, 13 Sep 2024 12:00:00 GMT                     |
-| Cache-Control    | 指示缓存机制如何处理响应                         | Cache-Control: no-cache, no-store, must-revalidate      |
-| Expires          | 指定响应到期时间，过期后响应可能会被认为是陈旧的 | Expires: Fri, 13 Sep 2024 12:00:00 GMT                  |
-| ETag             | 提供资源的唯一标识符，通常用于缓存验证           | ETag: "686897696a7c876b7e"                              |
-| Location         | 用于重定向响应，指示客户端访问的新的 URL         | Location: https://example.com/new-page                  |
-| Set-Cookie       | 用于设置客户端的                                 | cookie Set-Cookie: sessionId=abc123; Path=/; HttpOnly   |
-| WWW-Authenticate | 在需要身份验证时，告知客户端如何进行身份验证     | WWW-Authenticate: Basic realm="Example"                 |
+| 响应头             | 描述                                             | 示例值                                                  |
+| ------------------ | ------------------------------------------------ | ------------------------------------------------------- |
+| `Content-Type`     | 指示响应主体的媒体类型                           | Content-Type: text/html; application/json;charset=UTF-8 |
+| `Content-Length`   | 表示响应主体的长度（以字节为单位）               | Content-Length: 1234                                    |
+| `Server`           | 提供有关服务器的软件信息                         | Server: Apache/2.4.41 (Ubuntu)                          |
+| `Date`             | 指定响应消息的发送日期和时间                     | Date: Fri, 13 Sep 2024 12:00:00 GMT                     |
+| `Cache-Control`    | 指示缓存机制如何处理响应                         | Cache-Control: no-cache, no-store, must-revalidate      |
+| `Expires`          | 指定响应到期时间，过期后响应可能会被认为是陈旧的 | Expires: Fri, 13 Sep 2024 12:00:00 GMT                  |
+| `ETag`             | 提供资源的唯一标识符，通常用于缓存验证           | ETag: "686897696a7c876b7e"                              |
+| `Location`         | 用于重定向响应，指示客户端访问的新的 URL         | Location: https://example.com/new-page                  |
+| `Set-Cookie`       | 用于设置客户端的                                 | cookie Set-Cookie: sessionId=abc123; Path=/; HttpOnly   |
+| `WWW-Authenticate` | 在需要身份验证时，告知客户端如何进行身份验证     | WWW-Authenticate: Basic realm="Example"                 |
 
 ### 响应体
 
-Content-Type：指示响应体的媒体类型（如 text/html、application/json）。
-Content-Length：指示响应体的大小（以字节为单位）。
-Content-Encoding：指示响应体的编码方式（如 gzip，表示响应体经过压缩）。
+`Content-Type` ：指示响应体的媒体类型（如 text/html、application/json）。
+`Content-Length` ：指示响应体的大小（以字节为单位）。
+`Content-Encoding` ：指示响应体的编码方式（如 gzip，表示响应体经过压缩）。
 
 ### example
 

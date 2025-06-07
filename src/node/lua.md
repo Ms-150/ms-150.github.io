@@ -65,6 +65,26 @@ table.insert(array, 1, 5)  -- 在索引 1 处添加元素
 -- 删除数组元素
 table.remove(array)  -- 删除数组的最后一个元素
 table.remove(array, 2)  -- 删除索引为 2 的元素
+
+-- 对象
+local person = {
+    name = "John",
+    age = 30,
+    greet = function(self)
+        print("Hello, my name is " .. self.name)
+    end
+}
+
+-- 访问对象的属性
+print(person.name)  -- 输出：John
+print(person.age)   -- 输出：30
+
+-- 调用对象的方法
+person:greet()  -- 输出：Hello, my name is John
+
+-- 修改对象的属性
+person.age = 31
+print(person.age)  -- 输出：31
 ```
 
 ### 变量检测 type()
@@ -73,7 +93,7 @@ table.remove(array, 2)  -- 删除索引为 2 的元素
 type(10)       -- number
 type("hello")  -- string
 type(true)     -- boolean
-type(nil)      -- nil
+type(nil)      -- nil 空
 ```
 
 ```lua
@@ -84,6 +104,22 @@ obj = {           -- 对象
 
 -- 局部变量
 local pi = 3.14
+```
+### 数据类型转换
+
+```lua
+-- 字符串转数字
+tonumber("123")  -- 123
+tonumber("3.14") -- 3.14
+-- 数字转字符串
+tostring(123)  -- "123"
+tostring(3.14) -- "3.14"
+-- 布尔型转数字
+tonumber(true)  -- 1
+tonumber(false) -- 0
+-- 数字转布尔型
+toboolean(1)  -- true
+toboolean(0)  -- false
 ```
 
 ### 控制语句
@@ -114,5 +150,4 @@ do
     local name = "do-end"
     print(name)
 end
-
 ```

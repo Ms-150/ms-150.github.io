@@ -1831,3 +1831,51 @@ setInterval(() => {
 ```
 
 :::
+
+## net
+
+- 用于创建底层的 TCP 或 IPC 服务器和客户端。
+- 提供了对原始数据流的操作，适合实现自定义协议或需要直接操作 TCP 连接的场景。
+- 不包含 HTTP 协议相关的解析和封装，开发者需要自己处理数据格式。
+- 示例用途：Socket 通信、聊天服务器、消息推送等。
+
+::: code-group
+
+```js [tcp 服务器]
+const net = require("net");
+
+const server = net.createServer((socket) => {
+  console.log("客户端已连接");
+  socket.on("data", (data) => {
+    console.log("接收到数据:", data.toString());
+  });
+  socket.on("end", () => {
+    console.log("客户端已断开连接");
+  });
+  socket.write("欢迎连接到服务器！\n");
+});
+
+server.listen(8080, () => {
+  console.log("服务器正在监听端口 8080");
+});
+```
+
+```js [tcp 客户端]
+const net = require("net");
+
+const client = net.createConnection({ port: 8080 }, () => {
+  console.log("已连接到服务器");
+  client.write("你好，服务器！");
+});
+
+client.on("data", (data) => {
+  console.log("接收到数据:", data.toString());
+  client.end();
+});
+
+client.on("end", () => {
+  console.log("已从服务器断开连接");
+});
+```
+
+:::

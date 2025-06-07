@@ -38,6 +38,15 @@ exit; | \q          # 退出 sql
 
 ## 入门
 
+```bash
+数据库（Database）
+     └── Schema（模式）
+         ├── 表（Tables）
+         ├── 视图（Views）
+         ├── 存储过程（Stored Procedures）
+         └── 索引（Indexes）
+```
+
 ```sql
 -- 显示所有库
 SHOW DATABASES;

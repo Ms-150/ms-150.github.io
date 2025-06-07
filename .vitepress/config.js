@@ -216,6 +216,10 @@
           "collapsed": false,
           "items": [
             {
+              "text": "cache",
+              "link": "/http/cache"
+            },
+            {
               "text": "caddy",
               "link": "/http/caddy"
             },
@@ -238,6 +242,14 @@
             {
               "text": "security",
               "link": "/http/security"
+            },
+            {
+              "text": "serverLess",
+              "link": "/http/serverLess"
+            },
+            {
+              "text": "socket.io",
+              "link": "/http/socket.io"
             },
             {
               "text": "tcp",
@@ -336,6 +348,10 @@
           "collapsed": false,
           "items": [
             {
+              "text": "corntab",
+              "link": "/linux/corntab"
+            },
+            {
               "text": "ftp",
               "link": "/linux/ftp"
             },
@@ -400,6 +416,10 @@
               "link": "/node/ejs"
             },
             {
+              "text": "express-cache",
+              "link": "/node/express-cache"
+            },
+            {
               "text": "express",
               "link": "/node/express"
             },
@@ -420,12 +440,28 @@
               "link": "/node/marked"
             },
             {
+              "text": "multer",
+              "link": "/node/multer"
+            },
+            {
+              "text": "node-schedule",
+              "link": "/node/node-schedule"
+            },
+            {
               "text": "node",
               "link": "/node/node"
             },
             {
               "text": "npm&yarn&npx&pnpm",
               "link": "/node/npm&yarn&npx&pnpm"
+            },
+            {
+              "text": "puppeteer",
+              "link": "/node/puppeteer"
+            },
+            {
+              "text": "reptile",
+              "link": "/node/reptile"
             }
           ]
         }
@@ -451,6 +487,18 @@
             {
               "text": "index",
               "link": "/python/index"
+            },
+            {
+              "text": "jieba",
+              "link": "/python/jieba"
+            },
+            {
+              "text": "ssl",
+              "link": "/python/ssl"
+            },
+            {
+              "text": "wordcloud",
+              "link": "/python/wordcloud"
             }
           ]
         }

@@ -4,6 +4,13 @@
   "lang": "zh-CN",
   "head": [
     [
+      "script",
+      {
+        "type": "text/javascript"
+      },
+      "(function(c,l,a,r,i,t,y){ \n      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)}; \n      t=l.createElement(r);t.async=1;t.src=\"https://www.clarity.ms/tag/\"+i; \n      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y); \n      })(window, document, \"clarity\", \"script\", \"rw559jeiha\");"
+    ],
+    [
       "link",
       {
         "rel": "icon",
@@ -244,14 +251,6 @@
               "link": "/http/security"
             },
             {
-              "text": "serverLess",
-              "link": "/http/serverLess"
-            },
-            {
-              "text": "socket.io",
-              "link": "/http/socket.io"
-            },
-            {
               "text": "tcp",
               "link": "/http/tcp"
             },
@@ -348,10 +347,6 @@
           "collapsed": false,
           "items": [
             {
-              "text": "corntab",
-              "link": "/linux/corntab"
-            },
-            {
               "text": "ftp",
               "link": "/linux/ftp"
             },
@@ -440,10 +435,6 @@
               "link": "/node/marked"
             },
             {
-              "text": "multer",
-              "link": "/node/multer"
-            },
-            {
               "text": "node-schedule",
               "link": "/node/node-schedule"
             },
@@ -454,14 +445,6 @@
             {
               "text": "npm&yarn&npx&pnpm",
               "link": "/node/npm&yarn&npx&pnpm"
-            },
-            {
-              "text": "puppeteer",
-              "link": "/node/puppeteer"
-            },
-            {
-              "text": "reptile",
-              "link": "/node/reptile"
             }
           ]
         }
@@ -487,18 +470,6 @@
             {
               "text": "index",
               "link": "/python/index"
-            },
-            {
-              "text": "jieba",
-              "link": "/python/jieba"
-            },
-            {
-              "text": "ssl",
-              "link": "/python/ssl"
-            },
-            {
-              "text": "wordcloud",
-              "link": "/python/wordcloud"
             }
           ]
         }

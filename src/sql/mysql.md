@@ -270,52 +270,148 @@ Query OK, 0 rows affected (0.01 sec)
 
 ### 修改数据表 ALTER 命令
 
-#### 修改表名 RENAME TO
+::: code-group
 
-```sql
-ALTER TABLE old_table_name RENAME TO new_table_name;
--- or
-RENAME TABLE old_table_name TO new_table_name;
+```sql [修改表名 RENAME TO / TO]
+ALTER TABLE old_table_name
+RENAME TO new_table_name;
+--
+RENAME TABLE old_table_name
+TO new_table_name;
 ```
 
-#### 添加列 ADD
-
-```sql
+```sql [添加列 ADD]
 ALTER TABLE table_name
 ADD
 column_name column_type;
 ```
 
-#### 删除列 DROP
-
-```sql
+```sql [删除列 DROP]
 ALTER TABLE table_name
 DROP
 column_name;
 ```
 
-#### 修改列 MODIFY
-
-```sql
+```sql [修改列 MODIFY]
 ALTER TABLE table_name
 MODIFY
 column_name new_column_type;
 ```
 
-#### 重命名列 CHANGE
-
-```sql
+```sql [重命名列 CHANGE]
 ALTER TABLE table_name
 CHANGE
 old_column_name new_column_name column_type;
 ```
 
-#### 添加主键
+:::
 
-```sql
+### 主键
+
+主键的特征：
+
+1. 唯一性：不能重复
+2. 非空性：不能为 NULL
+3. 每个表只能有一个主键
+
+::: code-group
+
+```sql [创建表时定义]
+CREATE TABLE table_name (
+    id INT PRIMARY KEY,
+    name VARCHAR(50)
+);
+```
+
+```sql [创建表时在约束区定义]
+CREATE TABLE table_name (
+    id INT,
+    name VARCHAR(50),
+    PRIMARY KEY (id)
+);
+```
+
+```sql [在已有表上添加]
 ALTER TABLE table_name
 ADD PRIMARY KEY (id);
 ```
+
+#### 自增主键
+
+::: code-group
+
+```sql [创建自增主键]
+-- 最常用的主键方式
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,  -- 自动递增
+    name VARCHAR(50)
+);
+```
+
+```sql [自增值管理]
+-- 查看当前自增值
+SELECT AUTO_INCREMENT
+FROM information_schema.TABLES
+WHERE TABLE_SCHEMA = 'your_database'
+AND TABLE_NAME = 'users';
+
+-- 修改自增起始值
+ALTER TABLE users AUTO_INCREMENT = 1000;
+
+-- 清空表并重置自增值
+TRUNCATE TABLE users;
+```
+
+:::
+
+#### 复合主键
+
+```sql
+CREATE TABLE order_items (
+    order_id INT,
+    product_id INT,
+    quantity INT,
+    PRIMARY KEY (order_id, product_id)  -- 两个字段共同组成主键
+);
+```
+
+### 索引
+
+- 普通索引
+- 唯一索引
+- 主键索引
+- 联合索引
+
+```sql
+-- 创建索引
+CREATE INDEX index_name ON table_name (column_name);
+
+-- 创建唯一索引
+CREATE UNIQUE INDEX index_name ON table_name (column_name);
+
+-- 删除索引
+DROP INDEX index_name ON table_name;
+
+-- 显示表的索引
+SHOW INDEX FROM table_name;
+```
+
+::: code-group
+
+```sql [创建表时指定索引]
+CREATE TABLE users
+(
+  id    INT,
+  name  VARCHAR(50),
+  INDEX idx_name (name)
+);
+```
+
+```sql [后续添加索引]
+CREATE INDEX idx_name ON users (name);
+```
+
+:::
 
 ## 数据操作
 
@@ -356,14 +452,18 @@ WHERE age IN(15,16,17);
 ### 更新数据 UPDATE SET
 
 ```sql
-UPDATE table_name SET   -- UPDATE 表名 SET
-column_name1=value,column_name2=value         -- 字段1=值,字段2=值,
-[WHERE condition];      -- condition 条件可选 不带条件 更新全部
+UPDATE table_name AS t     -- 指定要更新的表名，并给表设置别名 t
+SET                        -- SET 关键字后跟要更新的字段
+    t.column_name1 = value,   -- 使用表别名引用字段：别名.字段1 = 新值
+    t.column_name2 = value    -- 使用表别名引用字段：别名.字段2 = 新值
+[WHERE t.condition];       -- WHERE 子句可选，使用表别名引用条件字段
 
--- example
-UPDATE table_name SET
-id=3,age=16
-WHERE id = 2;
+-- 示例：更新 id=2 的记录
+UPDATE table_name AS t     -- AS t 设置表别名为 t
+SET
+    t.id = 3,             -- 使用 t.id 引用 id 字段
+    t.age = 16            -- 使用 t.age 引用 age 字段
+WHERE t.id = 2;           -- 使用 t.id 引用条件中的 id 字段
 ```
 
 ### 查询数据 SELECT
@@ -772,7 +872,20 @@ SELECT * from `user` RIGHT JOIN `tables` ON user.id = tables.user_id;
 mysqldump 是 MySQL 提供的命令行工具，用于导出数据库的结构和数据。
 
 ```bash
+# 备份整个数据库
+mysqldump -u [username] -p [database_name] > backup.sql
 
+# 备份特定表
+mysqldump -u [username] -p [database_name] [table_name] > table_backup.sql
+
+# 仅备份结构
+mysqldump -u [username] -p --no-data [database_name] > structure.sql
+
+# 仅备份数据
+mysqldump -u [username] -p --no-create-info [database_name] > data.sql
+
+# 还原数据库
+mysql -u [username] -p [database_name] < backup.sql
 ```
 
 ## mysql2

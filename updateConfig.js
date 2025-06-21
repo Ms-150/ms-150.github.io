@@ -16,6 +16,9 @@ function generateSidebar(dir, basePath = "") {
     const stat = fs.statSync(fullPath);
 
     if (stat.isDirectory()) {
+       if (file === "public") {
+        return; 
+      }
       items.push({
         text: file.toUpperCase(),
         collapsed: true,
@@ -37,6 +40,10 @@ function generateSidebarConfig() {
   const sections = fs.readdirSync(path.join(__dirname, "src"));
 
   sections.forEach((section) => {
+    if (section === "public") {
+      return;
+    }
+
     const sectionPath = path.join(__dirname, "src", section);
     if (fs.statSync(sectionPath).isDirectory()) {
       sidebar[`/${section}/`] = [
@@ -64,13 +71,13 @@ config.themeConfig.sidebar = sidebar;
 
 // 将更新后的配置写回 .js 文件
 const updatedConfigContent = `
-  import { defineConfig } from "vitepress";
-  export default defineConfig(${JSON.stringify(config, null, 2)});
+    import { defineConfig } from "vitepress";
+    export default defineConfig(${JSON.stringify(config, null, 4)});
 `;
 
 fs.writeFileSync(configPath, updatedConfigContent, "utf-8");
 
 console.log(
   new Date().toLocaleTimeString() +
-    " config.js has been updated with the new sidebar."
+  " config.js has been updated with the new sidebar."
 );

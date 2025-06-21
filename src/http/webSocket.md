@@ -82,12 +82,13 @@ let heartInterval = setInterval(() => {
 
 ### example
 
-+ FrontEnd
+::: code-group
 
-```js
+```js [FrontEnd]
 // 创建 WebSocket
 // 协议 ws:// wss;// 类似 http:// https://
 const ws = new WebSocket("ws://localhost:8080");
+
 ws.addEventListener("open", () => {
   console.log("连接成功");
 });
@@ -116,9 +117,7 @@ ws.onmessage = (event) => {
 };
 ```
 
-+ BackEnd
-
-```js
+```js [BackEnd]
 const WebSocket = require("ws");
 
 const ws = new WebSocket.Server({ port: 8080 }, () => {
@@ -169,3 +168,5 @@ ws.on("connection", (socket) => {
   });
 });
 ```
+
+:::

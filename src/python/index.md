@@ -24,7 +24,18 @@ touch test.py
 echo "print('hello python')" > test.py
 
 python test.py  # 运行文件
-````
+```
+
+### 虚拟环境
+Python 虚拟环境是一种隔离的 Python 环境，可以在不同的项目中使用不同的 Python 版本和库。
+
+```bash
+# 创建虚拟环境
+python3 -m venv .venv
+# 激活 .venv 虚拟环境
+➜  PyCharmMiscProject source .venv/bin/activate
+(.venv) ➜  PyCharmMiscProject
+```
 
 ## pip
 
@@ -380,3 +391,4 @@ not (逻辑非)
 and (逻辑与)
 or (逻辑或)
 = (赋值运算符)
+````

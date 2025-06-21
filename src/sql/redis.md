@@ -645,3 +645,68 @@ INFO replication
 ```bash
 redis-server /path/to/redis-sentinel.conf --sentinel
 ```
+
+### 调用 `lua`
+
+原子操作 ：Lua 脚本在 Redis 中是以原子方式执行的，这意味着在脚本执行期间不会有其他命令插入，这对于需要多个命令组合成一个事务的场景非常有用。
+
+::: code-group
+```bash
+npm install express ioredis
+```
+
+```lua [rate_limit.lua]
+-- KEYS[1]: 限流的 key (例如：user:123:rate_limit)
+-- ARGV[1]: 时间窗口 (秒)
+-- ARGV[2]: 允许的最大请求次数
+
+local key = KEYS[1]
+local time_window = tonumber(ARGV[1])
+local max_requests = tonumber(ARGV[2])
+local current = tonumber(redis.call('get', key) or "0")
+
+if current > max_requests then
+    return 0 -- 超过限制
+else
+    redis.call('INCRBY', key, 1)
+    redis.call('EXPIRE', key, time_window)
+    return 1 -- 允许通过
+end
+```
+
+```js [app.js]
+const express = require('express');
+const Redis = require('ioredis');
+const fs = require('fs');
+const path = require('path');
+
+const app = express();
+const redis = new Redis();
+
+// 读取 Lua 脚本内容
+const luaScriptPath = path.join(__dirname, 'scripts', 'rate_limit.lua');
+const luaScript = fs.readFileSync(luaScriptPath, 'utf8');
+
+// 抽奖接口
+app.post('/lottery', (req, res) => {
+  const key = `user:${req.ip}:lottery_limit`;
+  redis.eval(luaScript, 1, key, 60, 5) // 60秒内最多5次请求
+    .then(result => {
+      if (result === 1) {
+        // 执行抽奖逻辑
+        res.send('抽奖成功！');
+      } else {
+        res.status(429).send('抽奖次数过多，请稍后再试。');
+      }
+    })
+    .catch(err => {
+      console.error('执行脚本时出错:', err);
+      res.status(500).send('服务器错误');
+    });
+});
+
+app.listen(3000, () => {
+  console.log('服务器运行在 http://localhost:3000');
+});
+```
+:::

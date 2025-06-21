@@ -10,7 +10,9 @@
     "docs:preview": "vitepress preview"
   },
   "dependencies": {
-    "jsbarcode": "^3.11.6",
+    "jsbarcode": "^3.12.1",
     "vue": "^3.5.16"
-  }
+  },
+  "author": "🌕🌖🌗🌘🌑🌒🌓🌔",
+  "license": "MIT"
 }

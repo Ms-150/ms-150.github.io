@@ -20,3 +20,14 @@
     -webkit-text-fill-color: transparent;
     animation: gradient-move 5s ease infinite;
 }
+
+.gradient-ai {
+    font-size: 33px;
+    font-weight: 500;
+    background: linear-gradient(315deg, #70eea2, #ff61a5, #a955f7);
+    background-size: 200% 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-move 2.5s ease infinite;
+}

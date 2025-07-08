@@ -45,11 +45,14 @@ caddy validate
 # 指定配置文件进行验证
 caddy validate --config /path/to/Caddyfile
 
+# 格式化 Caddyfile 文件，使其具有一致的缩进和换行符，方便阅读和维护
+caddy fmt --overwrite /etc/caddy/Caddyfile
+
 # 将 Caddyfile 转换为 JSON 格式的配置文件，方便查看对应的 JSON 结构
 caddy adapt
 
 # 指定 Caddyfile 路径进行转换
-caddy adapt --config /path/to/Caddyfile
+caddy adapt --config /etc/caddy/Caddyfile
 ```
 
 ## 快速启动

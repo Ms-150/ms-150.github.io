@@ -241,6 +241,42 @@
                     ]
                 }
             ],
+            "/flutter/": [
+                {
+                    "text": "flutter",
+                    "collapsed": false,
+                    "items": [
+                        {
+                            "text": "hooks_riverpod",
+                            "link": "/flutter/hooks_riverpod"
+                        },
+                        {
+                            "text": "index",
+                            "link": "/flutter/index"
+                        },
+                        {
+                            "text": "io",
+                            "link": "/flutter/io"
+                        },
+                        {
+                            "text": "keytool",
+                            "link": "/flutter/keytool"
+                        },
+                        {
+                            "text": "pub",
+                            "link": "/flutter/pub"
+                        },
+                        {
+                            "text": "sdkman",
+                            "link": "/flutter/sdkman"
+                        },
+                        {
+                            "text": "widget",
+                            "link": "/flutter/widget"
+                        }
+                    ]
+                }
+            ],
             "/git/": [
                 {
                     "text": "git",
@@ -522,6 +558,10 @@
                     "text": "python",
                     "collapsed": false,
                     "items": [
+                        {
+                            "text": "DrissionPage",
+                            "link": "/python/DrissionPage"
+                        },
                         {
                             "text": "index",
                             "link": "/python/index"

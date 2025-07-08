@@ -16,8 +16,8 @@ function generateSidebar(dir, basePath = "") {
     const stat = fs.statSync(fullPath);
 
     if (stat.isDirectory()) {
-       if (file === "public") {
-        return; 
+      if (file === "public") {
+        return;
       }
       items.push({
         text: file.toUpperCase(),

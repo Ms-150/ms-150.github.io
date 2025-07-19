@@ -247,12 +247,32 @@
                     "collapsed": false,
                     "items": [
                         {
+                            "text": "dart",
+                            "link": "/flutter/dart"
+                        },
+                        {
+                            "text": "dartpad",
+                            "link": "/flutter/dartpad"
+                        },
+                        {
+                            "text": "freezed",
+                            "link": "/flutter/freezed"
+                        },
+                        {
+                            "text": "fvm",
+                            "link": "/flutter/fvm"
+                        },
+                        {
                             "text": "hooks_riverpod",
                             "link": "/flutter/hooks_riverpod"
                         },
                         {
                             "text": "index",
                             "link": "/flutter/index"
+                        },
+                        {
+                            "text": "intl",
+                            "link": "/flutter/intl"
                         },
                         {
                             "text": "io",

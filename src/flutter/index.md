@@ -22,11 +22,16 @@ echo 'export PATH="$PATH:/opt/homebrew/opt/flutter/bin"' >> ~/.zshrc
 source ~/.zshrc
 ```
 
-## command
+## cli
+
+[https://docs.flutter.dev/reference/flutter-cli](https://docs.flutter.dev/reference/flutter-cli)
 
 ```bash
 # 查看 Flutter 版本
 flutter --version
+
+# 创建新的 Flutter 项目
+flutter create myapp
 
 # 查看 Flutter 环境信息
 flutter doctor
@@ -39,9 +44,6 @@ flutter run
   r # reload
   R # restart
 
-# 创建新的 Flutter 项目
-flutter create myapp
-
 # 查看可用的设备
 flutter devices
 
@@ -53,4 +55,16 @@ flutter build ios
 
 # 运行 Flutter 测试
 flutter test
+```
+
+## Assets 资源
+
+比如图片、字体、JSON 文件等。这些资源是应用用户界面的重要组成部分。Flutter 提供了一套直观的机制来管理和使用这些资源。
+
+```yaml [pubspec.yaml]
+flutter:
+  assets:
+    - assets/my_image.png # 声明单个图片文件
+    - assets/data/ # 声明整个目录 (例如，包含 JSON 或其他数据文件)
+    - images/ # 声明另一个图片目录
 ```

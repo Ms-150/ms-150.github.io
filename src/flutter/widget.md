@@ -12,6 +12,7 @@ Widget 主要分为两大类：
 
 - StatefulWidget (有状态 Widget)
 - StatelessWidget (无状态 Widget)
+- InheritedWidget (继承 Widget)
 
 ### 1. StatelessWidget (无状态 Widget)
 
@@ -242,7 +243,7 @@ BottomNavigationBar(
 
 :::
 
-#### 布局
+### 布局
 
 ::: code-group
 
@@ -334,6 +335,51 @@ Stack(
 )
 ```
 
+```dart [Expanded]
+Expanded(
+ flex: 1, // 占据剩余空间的 1 份
+ child: Container(
+   color: Colors.red,
+   child: const Center(child: Text('Expanded (flex: 1)', style: TextStyle(color: Colors.white))),
+ ),
+```
+
+```dart [Flexible]
+Flexible( // 红色方块会根据内容大小灵活伸缩，但不强制填满
+  flex: 1,
+  fit: FlexFit.loose, // 允许它更灵活地根据内容决定大小
+  child: Container(color: Colors.red, child: Text('短文本')),
+),
+Flexible( // 绿色方块也会根据内容大小灵活伸缩
+  flex: 1,
+  fit: FlexFit.loose,
+  child: Container(color: Colors.green, child: Text('一段比较长的文本，可能会自动换行')),
+),
+```
+
+```dart [Spacer]
+Row(
+  children: <Widget>[
+    Text('左边'),
+    Spacer(), // 填充左右文本之间的所有剩余空间
+    Text('右边'),
+  ],
+)
+
+// 或者均匀分布
+Row(
+  children: <Widget>[
+    Text('A'),
+    Spacer(), // 弹性空间1
+    Text('B'),
+    Spacer(flex: 2), // 弹性空间2，比空间1大一倍
+    Text('C'),
+  ],
+)
+```
+
+:::
+
 #### 输入交互
 
 ::: code-group
@@ -394,11 +440,11 @@ Radio<SingingCharacter>(
 
 :::
 
-#### 列表和滚动
+### 列表和滚动
 
 ::: code-group
 
-```dart [ListView]
+```dart [ListView.builder]
 // 常用的可滚动列表，适用于显示大量动态内容。可以一次性构建所有子项 (ListView)，也可以按需构建 (ListView.builder) 以提高性能。
 
 ListView.builder(
@@ -422,6 +468,40 @@ SingleChildScrollView(
     ],
   ),
 )
+```
+
+```dart [ListView.builder]
+ListView.builder(
+  itemCount: 100, // 列表项的总数量，如果是无限列表，可以省略或给一个很大的值
+  itemBuilder: (BuildContext context, int index) {
+    // 这个 builder 函数会为每个索引构建一个列表项
+    return ListTile(
+      title: Text('列表项 ${index + 1}'),
+      subtitle: Text('这是第 $index 个数据'),
+      leading: Icon(Icons.star),
+    );
+  },
+);
+```
+
+```dart [GridView.builder]
+GridView.builder(
+  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+    crossAxisCount: 2, // 每行/列显示2个
+    crossAxisSpacing: 10.0, // 交叉轴间距
+    mainAxisSpacing: 10.0, // 主轴间距
+  ),
+  itemCount: 50, // 网格项的总数量
+  itemBuilder: (BuildContext context, int index) {
+    // 这个 builder 函数会为每个索引构建一个网格项
+    return Card(
+      color: Colors.primaries[index % Colors.primaries.length], // 随机颜色
+      child: Center(
+        child: Text('格子 $index', style: const TextStyle(color: Colors.white, fontSize: 20)),
+      ),
+    );
+  },
+);
 ```
 
 :::

@@ -31,3 +31,14 @@
     -webkit-text-fill-color: transparent;
     animation: gradient-move 2.5s ease infinite;
 }
+
+body .VPNavBar {
+    background-color: transparent !important;
+    background-image: radial-gradient(rgb(255 255 255) 1px, #00000000 1px) !important;
+    background-size: 4px 4px !important;
+    backdrop-filter: saturate(180%) blur(8px) !important;
+}
+
+body .VPNavBar .content-body {
+    background-color: transparent !important;
+}

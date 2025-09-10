@@ -6,6 +6,12 @@ hero:
   name: "<span class='gradient-text'>My Blog</span>"
   text: "<span class='gradient-text'>探索前端的无限可能！</span>"
   tagline: 今天，也是充满希望的一天。
+  image: 
+    src: /mandala.svg
+    alt: 博客图片
+    width: 500
+    height: 500
+  
   # actions:
     # - theme: brand
     #   text: 开始阅读

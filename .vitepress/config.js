@@ -407,6 +407,10 @@
                             "link": "/js/cross-domain"
                         },
                         {
+                            "text": "decimal.js",
+                            "link": "/js/decimal.js"
+                        },
+                        {
                             "text": "mockjs",
                             "link": "/js/mockjs"
                         },

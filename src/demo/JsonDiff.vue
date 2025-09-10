@@ -322,7 +322,7 @@ function getFullDiff(a, b, path = '') {
 
 .json-panels {
   display: flex;
-  gap: 16px;
+  gap: 5px;
 }
 
 .json-panel {

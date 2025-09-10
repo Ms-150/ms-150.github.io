@@ -2,7 +2,7 @@
 import JsBarcode from './JsBarcode.vue';
 </script>
 
-<h2 style="text-align: center">二维码生成预览</h2>
+<h2 style="text-align: center">条形码生成预览</h2>
 
 <JsBarcode />
 

@@ -320,3 +320,332 @@ s2..add(1)
 ..add(2)
 ..add(3);  // {1, 2, 3}
 ```
+
+## 函数
+
+- 直接声明
+- 箭头函数 单行函数
+- 匿名函数
+- 立即执行函数
+
+```dart
+// 不需要 function 关键字
+void main() {
+  print('hello world');
+}
+
+int getNumber() {
+  return 10;
+}
+// 匿名函数
+var myPrint = () {
+  print('hello world');
+};
+
+// =>  箭头函数 单行函数
+var myPrint2 = () => print('hello world');
+
+// 立即执行函数
+(() {
+  print('hello world');
+})();
+```
+
+### 函数参数
+
+- 必填参数
+- 可选参数 []
+- 命名参数 {}
+
+```dart
+// 必填参数
+String getUser1(String name) {
+  return "hi $name";
+};
+getUser1('zhangsan'); // hi zhangsan
+
+// 可选参数
+String getUser2(String name, [int? age = 18]) {
+  return "hi $name, 你今年 $age 岁";
+};
+getUser2('zhangsan' , 20); // hi zhangsan, 你今年 20 岁
+
+// 命名参数
+String getUser3(String name, {int age = 18}) {
+  return "hi $name, 你今年 $age 岁";
+};
+getUser3('zhangsan', age: 18); // hi zhangsan, 你今年 18 岁
+```
+
+### 作用域和闭包
+
+- 作用域
+
+  - 全局作用域
+  - 局部作用域
+  - 函数作用域
+
+- 闭包
+  外层函数被调用后，外层函数的作用豫对象被内层函数引用着，导致外层函数的作用豫对象无法释放，从而形成闭包
+
+```dart
+// 全局变量
+var global = 10;
+
+void main (){
+  printInfo(){
+    // 局部变量
+    var local = 20;
+    print(global);
+    print(local);
+  }
+  printInfo();
+}
+```
+
+```dart
+var parent (){
+  var count = 1000;
+  return (){
+    count--;
+    print(count);
+  };
+}
+
+var child = parent();
+child(); // 999
+child(); // 998
+```
+
+### 异步函数
+
+// https://httpbin.org/
+
+::: code-group
+
+```dart [then]
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+void fetchIp() {
+  final url = Uri.parse('https://httpbin.org/ip');
+
+  http.get(url).then((response) {
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      print('你的IP是: ${data['origin']}');
+    } else {
+      print('请求失败，状态码: ${response.statusCode}');
+    }
+  }).catchError((error) {
+    print('请求发生异常: $error');
+  });
+}
+
+void main() {
+  fetchIp();
+}
+
+```
+
+```dart [async]
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+Future<void> fetchIp() async {
+  final url = Uri.parse('https://httpbin.org/ip');
+
+  try {
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      print('你的IP是: ${data['origin']}');
+    } else {
+      print('请求失败，状态码: ${response.statusCode}');
+    }
+  } catch (e) {
+    print('请求发生异常: $e');
+  }
+}
+
+void main() async {
+  await fetchIp();
+}
+```
+
+:::
+
+## 类与对象
+
+### 类 class
+
+定义类 通过 `class`关键字生命的代码段，包含属性和方法。
+
+- 属性 描述类的变量
+- 方法 类中的函数 称为类的方法
+
+对象 类示例化的结果
+
+```dart
+// 声明类
+class Person {
+  // 类的属性
+  String name = 'zhangsan';
+
+  // 类的方法
+  void getInfo() {
+    print('我的名字是 $name');
+  }
+}
+
+void main() {
+  // 示例化类，然后得到一个对象
+  Person p = new Person();
+  // 访问类中的属性
+  print(p.name);
+  // 访问类中的方法
+  p.getInfo();
+}
+```
+
+### 构造函数
+
+- 默认构造函数
+- 命名构造函数
+- 常量构造函数
+- 工厂构造函数
+
+#### 默认构造函数
+
+与类同名的函数，在示例化时，会自动调用
+
+```dart
+class Point {
+  num x, y;
+
+  Point() {
+    print('默认构造函数, 示例化时 我第一个调用');
+    x = 0; // == this.x = 0; this 可以省略 声明有歧义时 this 不能省略
+    y = 0;
+  };
+}
+
+void() {
+  var p = new Point();
+  print(p.x)
+}
+```
+
+```dart
+class Point {
+  num x, y;
+
+  // 1. 声明普通构造函数
+  Point(num x, num y) {
+    this.x = x;
+    this.y = y;
+  };
+
+  // or
+  // 2. 声明普通构造函数
+  // Point(this.x, this.y);
+}
+
+void() {
+  var p = new Point(3, 4);
+  print(p.x)
+}
+```
+
+#### 命名构造函数
+
+在类中使用命名构造器（类名.函数名）实现多个构造器，可以提供额外的清晰度
+命名构造函数 个数不限制
+
+```dart
+class Point {
+  num x, y;
+  // 声明普通构造函数
+  Point(this.x, this.y);
+
+  // 命名构造函数1
+  Point.default() {
+    this.x = 0;
+    this.y = 0;
+  }
+
+  // 命名构造函数2
+  Point.formJson({x: 0, y: 0}) {
+    this.x = x;
+    this.y = y;
+  }
+}
+
+void() {
+  // 默认坐标
+  var p1 = new Point.default();
+
+  // 手动设置坐标
+  var p2 = new Point.formJson({x: 10, y: 20});
+};
+```
+
+#### 常量构造函数
+
+如果类生成的对象不会改变，可以通过常量构造函数使这些对象称为编译时常量
+
+```dart
+class ImmutablePoint {
+  // 属性必须用过 final 声明
+  final num x, y;
+
+  // 常量构造函数 必须通过 const 声明
+  const ImmutablePoint(this.x, this.y);
+};
+
+void main() {
+
+  // 常量构造函数可以当 不同构造函数使用 new关键字可省略
+  const p1 = new ImmutablePoint(1, 2);
+  const p2 = ImmutablePoint(1, 2);
+  print(p1 == p2); // false
+
+  // 不可变对象 必须通过 const 声明
+  const p3 = const ImmutablePoint(10, 20);
+  const p4 = const ImmutablePoint(10, 20);
+  print(p1 == p2); // true
+}
+```
+
+#### 工厂构造函数
+
+通过 factory 声明 工厂函数不会自动生成实例，而是通过代码来判断返回的实例 单例模式
+
+```dart
+class Person {
+  String name;
+
+  static Person instance;
+
+  // 工厂构造函数
+  factory Person([String name = ' ']) {
+    // 第一次示例化
+    if (Person.instance == null) {
+      Person.instance = Person.newSelf(name);
+    }
+    // 非第一次示例化
+    return Person.instance;
+  };
+
+  // 命名构造函数
+  Person.newSelf(this.name)
+}
+
+void main () {
+    var p1 = new Person('zhangsan');
+    var p2 = new Person('lisi');
+    print(p1.name); // zhangsan
+    print(p2.name); // zhangsan（还是第一次的名字）
+};
+```

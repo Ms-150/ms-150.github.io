@@ -411,6 +411,10 @@
                             "link": "/js/decimal.js"
                         },
                         {
+                            "text": "eventLoop",
+                            "link": "/js/eventLoop"
+                        },
+                        {
                             "text": "mockjs",
                             "link": "/js/mockjs"
                         },
@@ -425,6 +429,10 @@
                         {
                             "text": "navigator.sendBeacon",
                             "link": "/js/navigator.sendBeacon"
+                        },
+                        {
+                            "text": "prototype",
+                            "link": "/js/prototype"
                         },
                         {
                             "text": "qrcode",

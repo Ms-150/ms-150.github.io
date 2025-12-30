@@ -55,6 +55,9 @@ flutter build ios
 
 # 运行 Flutter 测试
 flutter test
+
+flutter clean # 清除构建缓存
+
 ```
 
 ## Assets 资源

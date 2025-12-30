@@ -431,6 +431,10 @@
                             "link": "/js/navigator.sendBeacon"
                         },
                         {
+                            "text": "promise",
+                            "link": "/js/promise"
+                        },
+                        {
                             "text": "prototype",
                             "link": "/js/prototype"
                         },
@@ -575,6 +579,10 @@
                             "link": "/node/npm&yarn&npx&pnpm"
                         },
                         {
+                            "text": "pm2",
+                            "link": "/node/pm2"
+                        },
+                        {
                             "text": "puppeteer",
                             "link": "/node/puppeteer"
                         },
@@ -682,6 +690,10 @@
                     "text": "util",
                     "collapsed": false,
                     "items": [
+                        {
+                            "text": "1Panel",
+                            "link": "/util/1Panel"
+                        },
                         {
                             "text": "RegularExpressions",
                             "link": "/util/RegularExpressions"

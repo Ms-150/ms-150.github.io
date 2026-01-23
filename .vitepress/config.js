@@ -623,6 +623,10 @@
                     "collapsed": false,
                     "items": [
                         {
+                            "text": "SQLServer",
+                            "link": "/sql/SQLServer"
+                        },
+                        {
                             "text": "knex",
                             "link": "/sql/knex"
                         },
@@ -641,6 +645,10 @@
                         {
                             "text": "redis",
                             "link": "/sql/redis"
+                        },
+                        {
+                            "text": "sqlite3",
+                            "link": "/sql/sqlite3"
                         }
                     ]
                 }

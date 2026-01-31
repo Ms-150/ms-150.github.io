@@ -6,19 +6,25 @@ Docker 是一个开源平台，旨在通过容器技术简化应用程序的开�
 
 ## 基本概念
 
-- 镜像 images
+- 镜像 `images`
   一个轻量级、独立、可执行的软件包，包含运行应用程序所需的所有内容。镜像由一系列文件系统层组成，通过联合文件系统（UnionFS）叠加在一起，构成最终的镜像。
-- 容器 container
+
+- 容器 `container`
   基于镜像启动的一个轻量级、独立的可运行环境。它们共享宿主操作系统的内核，但彼此隔离。容器是开发、测试和部署应用程序的核心单元。
-- Docker Hub
+
+- 仓库 `Docker Hub`
   一个公共仓库，用于存储和共享 Docker 镜像。你可以从 Docker Hub 拉取镜像，也可以将自己的镜像推送到 Docker Hub。
-- 数据卷 Docker Volumes
+
+- 数据卷 `Docker Volumes`
   数据卷用于持久化和共享数据。它们允许你在容器之间共享数据，并将数据与容器的生命周期分离，以避免数据丢失。
-- Dockerfile
+
+- 自动化构建脚本 `Dockerfile`
   一个文本文件，包含了一系列指令，用于构建 Docker 镜像。
-- Docker Compose
+
+- 组合 `Docker Compose`
   用于定义和运行多容器 Docker 应用的工具。
-- 集群 Docker Swarm
+
+- 集群 `Docker Swarm`
   用于管理容器集群的原生编排工具。它允许你将多台 Docker 主机集群化，作为一个单一的虚拟 Docker 主机来管理和部署容器。
 
 ```bash
@@ -28,13 +34,13 @@ docker --help
 docker info     # 查看 docker 配置信息
 ```
 
-## Image 镜象 类似 js 对象的类
+## Image 镜象
 
 镜像是一个轻量级、独立、可执行的软件包，包含运行应用程序所需的所有内容。
 每个镜像由一系列文件系统层组成，这些层通过联合文件系统（UnionFS）叠加在一起，构成最终的镜像。
 
 ```bash
-docker image    # 列出 镜像相关命令
+docker images    # 列出 镜像相关命令
 
 docker search <镜像名>      # 搜索镜像
 docker images ls           # 列出本地镜像
@@ -48,7 +54,7 @@ docker image history <镜像名>:<标签> # 查看镜像的构建历史（即镜
 docker exec -it my_centos bash # 进去已运行的容器 bash
 ```
 
-## Container 容器 类似 js 对象
+## Container 容器
 
 基于镜像启动的一个轻量级、独立的可运行环境。但共享宿主操作系统的内核。容器是隔离的，但可以互相通信。
 
@@ -112,36 +118,48 @@ VOLUME        # 声明一个挂载点，容器运行时将主机上的目录或�
 
 ### 构建自定义镜像
 
-1. 编写 Dockerfile 文件
+::: code-group
 
-```bash
-mkdir docker_file   # 任意位置创建 保存 Dockerfile 的文件夹
+```bash [1. 准备环境]
+mkdir my-ubuntu-web
+cd my-ubuntu-web
 vim Dockerfile   # 创建 Dockerfile 文件 （规定命名）
 ```
 
-```bash
-# 使用官方 CentOS 作为基础镜像
-FROM centos:7
+```Dockerfile [2. 编写 Dockerfile]
+FROM ubuntu:24.04
 
-# 更新软件包并安装 Nginx
-RUN yum -y update && \
-    yum -y install epel-release && \
-    yum -y install nginx
+# 设置环境变量，防止安装过程中弹出交互对话框
+ENV DEBIAN_FRONTEND=noninteractive
 
-# 暴露 80 端口
+# 更新源并安装 Nginx
+# && 连接命令可以减少镜像层数
+# 安装完后清理缓存，保持镜像“身材”
+RUN apt-get update && 
+    apt-get install -y nginx && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# 暴露 80 端口（告诉 Docker 这个容器监听 80）
 EXPOSE 80
 
 # 启动 Nginx
+# -g "daemon off;" 意思是让 nginx 在前台运行
+# 记住：Docker 容器需要一个前台进程才能保持运行，否则容器启动即退出
 CMD ["nginx", "-g", "daemon off;"]
 ```
 
-2. 构建
-
-```bash
-docker build -f 路径/Dockerfile -t 镜像名 .
+```bash [3. 构建与运行]
+# -t 给你镜像起个名字，比如 my-web:v1
+# . 代表当前目录（寻找 Dockerfile）
+docker build -t my-web:v1 .
 ```
 
-3. 测试运行自定义镜像
+```bash [4. 测试]
+打开浏览器访问：[http://localhost:8888](http://localhost:8888)
+#  你应该能看到经典的 "Welcome to nginx!" 页面。
+```
+:::
 
 ### 镜像迁移 备份和恢复
 
@@ -163,12 +181,14 @@ docker load -i /路径/镜像.tar
 
 ### 镜像加速器配置
 
+::: code-group
+
 ```bash
 # Docker Desktop 配置地址
 vim /Users/ms/.docker/daemon.json
 ```
 
-```diff
+```diff [daemon.json]
 {
   "builder": {
     "gc": {
@@ -180,6 +200,8 @@ vim /Users/ms/.docker/daemon.json
 +  "registry-mirrors": ["https://vsiidjop.mirror.aliyuncs.com"]
 }
 ```
+
+:::
 
 ### 推送镜像
 
@@ -199,33 +221,38 @@ docker push 150337/hello-world-test:latest
 
 Docker 提供了一个官方的 `Registry` 镜像，你可以通过以下命令启动一个私有仓库
 
-```bash
-# 1. 搭建
+::: code-group
+
+```bash [1. 搭建]
 docker pull registry
 
 docker run -d -p 5555:5000 --name my-registry registry
-
 # or 挂载数据卷
 docker run -d -p 5555:5000 --name my_registry -v /var/lib/docker/registty:/var/lib/registry registry
 
 # http://localhost:5555/v2/
+```
 
-# 2. 推送
+```bash [2. 推送]
 docker tag hello-world localhost:5555/hello
 docker push localhost:5555/hello
+```
 
-# 3. 查看
+```bash [3. 查看]
 http://localhost:5555/v2/_catalog
+```
 
-# 4. 拉取
+```bash [4. 拉取]
 docker run -it --name hello-5555 localhost:5555/hello
 ```
 
+:::
+
 #### 认证 授权
 
-1. 创建证书存储目录
+::: code-group
 
-```bash
+```bash [1. 创建证书存储目录]
 mkdir -p /var/lib/docker/registry/certs   # 创建证书存储目录
 
 openssl genrsa -out registry.ket 2048     # 生成私钥
@@ -234,9 +261,7 @@ openssl req -new -key ./registry.key -out registry.csr # 生成证书请求文�
 Common Name (e.g. server FQDN or YOUR name) []:127.0.0.1  # 填写宿主机地址
 ```
 
-2. 生成鉴权密码文件
-
-```bash
+```bash [2. 生成鉴权密码文件]
 brew install httpd
 
 htpasswd -Bbn root admin > /var/lib/docker/registry/auth/htpasswd # 鉴权密码文件
@@ -245,9 +270,7 @@ htpasswd -Bbn root admin > /var/lib/docker/registry/auth/htpasswd # 鉴权密码
 htpasswd -c /var/lib/docker/registry/auth/htpasswd root
 ```
 
-3. 重新运行容器
-
-```bash
+```bash [3. 重新运行容器]
 docker run -di -p 5555:5000 --name my_registry \
 -v /var/lib/docker/registry:/var/lib/registry \
 -v /var/lib/docker/registry/certs:/certs \
@@ -260,9 +283,7 @@ docker run -di -p 5555:5000 --name my_registry \
 registry:latest
 ```
 
-4. 推送
-
-```bash
+```bash [4. 推送]
 docker tag hello-world 127.0.0.1:5555/hello   # tag
 docker push 127.0.0.1:5555/hello              # push
 >>>
@@ -277,7 +298,9 @@ docker push 127.0.0.1:5555/hello  # push
 docker logout 127.0.0.1:5555  # 退出
 ```
 
-## Network
+:::
+
+## Network 网路
 
 用于连接容器的基础设施。它可以让容器相互通信，或者与外部网络进行通信
 
@@ -296,11 +319,11 @@ NETWORK ID     NAME      DRIVER    SCOPE
 ### 网络模式
 
 - 默认类型
-  | 类型 | | 备注 |
+  | 类型   |                                                                                        | 备注 |
   | ------ | -------------------------------------------------------------------------------------- | ---- |
-  | bridge | 每个容器连接到一个虚拟的内部桥接网络。容器可以通过容器名称或 IP 地址互相通信 | 默认 |
-  | host | 容器直接使用主机的网络栈，和主机共享网络命名空间。容器的 IP 地址和端口与主机完全相同。 | |
-  | none | 容器没有连接到任何网络。 | |
+  | bridge | 每个容器连接到一个虚拟的内部桥接网络。容器可以通过容器名称或 IP 地址互相通信           | 默认 |
+  | host   | 容器直接使用主机的网络栈，和主机共享网络命名空间。容器的 IP 地址和端口与主机完全相同。 |      |
+  | none   | 容器没有连接到任何网络。                                                               |      |
 
 ```bash
 docker --network host centos # 指定网络模式
@@ -343,16 +366,16 @@ docker-compose down # 停止 并移除容器和网络
 
 ### usage
 
-```bash
-# 1. 创建 文件夹
+::: code-group
 
+```bash [1. 创建文件]
 mkdir -p /var/lib/docker/docker-compose-nginx
 cd /var/lib/docker/docker-compose-nginx
 
-# 2. 创建 docker-compose.yml 文件
 vi docker-compose.yml
->>>
+```
 
+```yml [2. docker-compose.yml]
 version: '3'
 
 services:
@@ -367,13 +390,17 @@ services:
 networks:
   custom_network:
     driver: bridge
+```
 
-# 3. 启动
-
+```bash [3. 启动]
 docker-compose up
+```
 
+```bash [4. 关闭]
 docker-compose down
 ```
+
+:::
 
 ## Swarm 集群
 

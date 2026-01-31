@@ -527,6 +527,10 @@
                     "collapsed": false,
                     "items": [
                         {
+                            "text": "RabbitMQ",
+                            "link": "/node/RabbitMQ"
+                        },
+                        {
                             "text": "browser-sync",
                             "link": "/node/browser-sync"
                         },
@@ -539,12 +543,20 @@
                             "link": "/node/ejs"
                         },
                         {
+                            "text": "elasticsearch",
+                            "link": "/node/elasticsearch"
+                        },
+                        {
                             "text": "express-cache",
                             "link": "/node/express-cache"
                         },
                         {
                             "text": "express",
                             "link": "/node/express"
+                        },
+                        {
+                            "text": "fastify",
+                            "link": "/node/fastify"
                         },
                         {
                             "text": "ioredis",
@@ -555,6 +567,10 @@
                             "link": "/node/jwt"
                         },
                         {
+                            "text": "kafka",
+                            "link": "/node/kafka"
+                        },
+                        {
                             "text": "lua",
                             "link": "/node/lua"
                         },
@@ -563,8 +579,16 @@
                             "link": "/node/marked"
                         },
                         {
+                            "text": "micro-server",
+                            "link": "/node/micro-server"
+                        },
+                        {
                             "text": "multer",
                             "link": "/node/multer"
+                        },
+                        {
+                            "text": "nacos",
+                            "link": "/node/nacos"
                         },
                         {
                             "text": "node-schedule",
@@ -753,6 +777,10 @@
                         {
                             "text": "transformTools",
                             "link": "/util/transformTools"
+                        },
+                        {
+                            "text": "yaml",
+                            "link": "/util/yaml"
                         }
                     ]
                 }

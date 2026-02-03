@@ -415,6 +415,14 @@
                             "link": "/js/eventLoop"
                         },
                         {
+                            "text": "faker",
+                            "link": "/js/faker"
+                        },
+                        {
+                            "text": "loadtest",
+                            "link": "/js/loadtest"
+                        },
+                        {
                             "text": "mockjs",
                             "link": "/js/mockjs"
                         },
@@ -537,6 +545,10 @@
                         {
                             "text": "cli",
                             "link": "/node/cli"
+                        },
+                        {
+                            "text": "cluster",
+                            "link": "/node/cluster"
                         },
                         {
                             "text": "ejs",

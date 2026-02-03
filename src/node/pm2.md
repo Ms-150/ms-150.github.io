@@ -1,6 +1,6 @@
 # PM2
 
-M2 是一个用于 Node.js 应用程序的生产环境进程管理器（Process Manager）。
+PM2 是一个用于 Node.js 应用程序的生产环境进程管理器（Process Manager）。
 它是一个功能强大且功能丰富的工具，旨在帮助开发者和运维人员管理、监控和保持 Node.js 应用的持续运行。
 
 ## 核心功能与优势
@@ -20,11 +20,6 @@ PM2 的目标是确保您的 Node.js 应用程序在服务器上以高性能和�
 
 集群模式 (Cluster Mode)：这是 PM2 最强大的功能之一。它可以利用服务器的所有 CPU 核心来运行你的 Node.js 应用的多个实例。
 
-```bash
-pm2 start app.js -i 0 
-# -i 0 表示 PM2 会根据服务器的 CPU 核心数自动创建尽可能多的实例。
-```
-
 在这种模式下，PM2 充当负载均衡器，将进入的请求分散到所有子进程中，大大提高了应用的吞吐量和稳定性。
 
 4. 监控和日志 (Monitoring & Logging)
@@ -35,34 +30,107 @@ pm2 start app.js -i 0
 + 声明式配置：你可以使用 JSON 或 YAML 配置文件来定义应用的启动参数、环境变量、集群数量等，方便版本控制和部署。
 + 多环境支持：可以为开发、测试和生产等不同环境设置不同的配置。
 
-## command
+## install
 
 ```bash
-
 npm install pm2 -g      # 安装
+```
 
-pm2 start index.js --name <my-web-app> # 启动应用并命名
+## command
 
+
+::: code-group
+
+
+```bash
+pm2 start index.js --name <name>    # 启动应用并命名
+# --name xxx	给进程命名
+
+pm2 list                           # 查看所有进程
+pm2 describe <id/name>             # 查看应用详情
+pm2 stop <id/name>                 # 停止应用
+pm2 restart <id/name>              # 重启（会中断请求）
+pm2 reload <id/name>               # 热重载（零停机，集群模式推荐）
+pm2 delete <id/name>               # 删除应用
+
+```
+
+```bash [集群部署]
+pm2 start index.js -i max 
+
+# -i max	启动多进程（cluster 模式，自动使用所有 CPU）
+```
+
+```bash [日志]
 pm2 logs              # 查看日志（实时输出）
+```
+
+```bash [性能监控]
 pm2 monit             # 打开监控面板（CPU、内存、请求速率等）
+```
 
-pm2 list              # 查看所有进程
-pm2 describe my-app   # 查看某个应用的详细信息
-pm2 stop my-app       # 停止应用
-pm2 restart my-app    # 重启应用
-pm2 reload my-app     # 重载应用（零停机重启，推荐在集群模式下使用）
-pm2 delete my-app     # 删除应用
+:::
 
-pm2 startup           # 设置开机自启（根据系统生成命令）
-pm2 save              # 保存当前进程列表，重启后自动恢复
+### 开机自启
 
+::: code-group
 
-# 配置与部署
+```bash [开机自启]
+pm2 start app.j # 启动项目
+pm2 save              # 保存当前进程信息
+pm2 startup           # 设置开机自启 根据系统类型（systemd、launchd、upstart 等）自动生成命令
+pm2 startup systemd   # 开机自启
 
-# 配置文件 CommonJS 格式
+# 关闭开机自启
+
+pm2 unstartup systemd   # 关闭开机自启
+pm2 save                # 保存
+```
+
+:::
+
+### 部署与环境管理
+
+::: code-group
+
+```bash [生成配置文件]
+pm2 init simple
+# ecosystem.config.js
+# 可以支持 JSON 文件
+```
+
+```js [ecosystem.config.json]
+{
+  "apps": [
+    {
+      "name": "my-app",
+      "script": "./app.js",
+      "instances": 4,
+      "exec_mode": "cluster",
+      "watch": true,
+      "max_memory_restart": "200M",
+      "env": {
+        "NODE_ENV": "development",
+        "PORT": 3000
+      },
+      "env_production": {
+        "NODE_ENV": "production",
+        "PORT": 8080
+      }
+    }
+  ]
+} 
+```
+
+```bash 
+# 运行配置文件
 pm2 start ecosystem.config.js
+# or
+pm2 start ecosystem.config.json
 
 # 多环境支持
 pm2 start ecosystem.config.js --env production
 pm2 start ecosystem.config.js --env development
 ```
+
+:::

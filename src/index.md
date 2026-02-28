@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "<span class='gradient-text'>My Blog</span>"
+  name: "<span class='gradient-text'>Ms Blog</span>"
   text: "<span class='gradient-text'>探索前端的无限可能！</span>"
   tagline: 今天，也是充满希望的一天。
   image: 

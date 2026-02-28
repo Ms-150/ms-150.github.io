@@ -1,5 +1,72 @@
-<svg width="500" height="500" viewBox="0 0 675 675" fill="red" xmlns="http://www.w3.org/2000/svg" class="mandala">
-    <title>Mandala</title>
+<svg width="600" height="600" viewBox="0 0 675 675" xmlns="http://www.w3.org/2000/svg" class="mandala">
+    <title>Refined Cyber Mandala</title>
+    <style>
+        .mandala {
+            transform-origin: center;
+            overflow: visible;
+            /* 关键优化：让层叠处产生加亮效果 */
+            mix-blend-mode: screen;
+        }
+
+        .ring-text {
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            font-size: 14px;
+            /* 稍微拉开字间距，增加呼吸感 */
+            letter-spacing: 1px;
+            fill: #ff3355;
+            /* 优化发光效果，使其更贴合文字边缘 */
+            filter: drop-shadow(0 0 2px rgba(255, 51, 85, 0.4));
+        }
+
+        /* 维持原有的极慢旋转 */
+        .spin-clock {
+            transform-origin: 337.5px 337.5px;
+            animation: rotate-clock 120s linear infinite;
+        }
+
+        .spin-counter {
+            transform-origin: 337.5px 337.5px;
+            animation: rotate-counter 140s linear infinite;
+        }
+
+        /* 纯透明度呼吸律动 */
+        .ring-anim {
+            animation: pulse 12s ease-in-out infinite;
+        }
+
+        .ring-1 { animation-delay: 0s; }
+        .ring-2 { animation-delay: -2s; fill: #ff6688; }
+        .ring-3 { animation-delay: -4s; }
+        .ring-4 { animation-delay: -6s; fill: #ff4466; }
+        .ring-5 { animation-delay: -8s; }
+
+        @keyframes rotate-clock {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
+
+        @keyframes rotate-counter {
+            from { transform: rotate(360deg); }
+            to   { transform: rotate(0deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.45; }
+            50%      { opacity: 0.95; }
+        }
+
+        .motion-layer {
+            animation: fadeIn 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            transform-origin: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+    </style>
+    
     <defs>
         <path d="M337.5,337.5 m-320,0 a320,320 0 1,1 640,0 a320,320 0 1,1 -640,0" id="circle1"></path>
         <path d="M337.5,337.5 m-280,0 a280,280 0 1,1 560,0 a280,280 0 1,1 -560,0" id="circle2"></path>
@@ -7,9 +74,12 @@
         <path d="M337.5,337.5 m-200,0 a200,200 0 1,1 400,0 a200,200 0 1,1 -400,0" id="circle4"></path>
         <path d="M337.5,337.5 m-160,0 a160,160 0 1,1 320,0 a160,160 0 1,1 -320,0" id="circle5"></path>
     </defs>
-    <text dy="70" textLength="2010"><textPath textLength="2010" href="#circle1">   /<tspan>/</tspan>/<tspan>/</tspan>/<tspan>/</tspan>/<tspan>/</tspan>/<tspan>/</tspan>/<tspan>/</tspan>   /<tspan>/</tspan>/<tspan>/</tspan>/<tspan>/</tspan>/<tspan>/</tspan>/<tspan>/</tspan>/<tspan>/</tspan>   /<tspan>/</tspan>/<tspan>/</tspan>/<tspan>/</tspan>/<tspan>/</tspan>/<tspan>/</tspan>/<tspan>/</tspan>   /<tspan>/</tspan>/<tspan>/</tspan>/<tspan>/</tspan>/<tspan>/</tspan>/<tspan>/</tspan>/<tspan>/</tspan>   /<tspan>/</tspan>/<tspan>/</tspan>/<tspan>/</tspan>/<tspan>/</tspan>/<tspan>/</tspan>/<tspan>/</tspan>   /<tspan>/</tspan>/<tspan>/</tspan>/<tspan>/</tspan>/<tspan>/</tspan>/<tspan>/</tspan>/<tspan>/</tspan>   /<tspan>/</tspan>/<tspan>/</tspan>/<tspan>/</tspan>/<tspan>/</tspan>/<tspan>/</tspan>/<tspan>/</tspan></textPath></text>
-    <text dy="70" textLength="1760"><textPath textLength="1760" href="#circle2">  +<tspan>+</tspan>+<tspan>+</tspan>+<tspan>+</tspan>  +<tspan>+</tspan>+<tspan>+</tspan>+<tspan>+</tspan>  +<tspan>+</tspan>+<tspan>+</tspan>+<tspan>+</tspan>  +<tspan>+</tspan>+<tspan>+</tspan>+<tspan>+</tspan>  +<tspan>+</tspan>+<tspan>+</tspan>+<tspan>+</tspan>  +<tspan>+</tspan>+<tspan>+</tspan>+<tspan>+</tspan>  +<tspan>+</tspan>+<tspan>+</tspan>+</textPath></text>
-    <text dy="70" textLength="1500"><textPath textLength="1500" href="#circle3"><tspan>{</tspan><tspan>{</tspan>{<tspan>{</tspan>{ <tspan>}</tspan><tspan>}</tspan>}<tspan>}</tspan>}  <tspan>{</tspan><tspan>{</tspan>{<tspan>{</tspan>{ <tspan>}</tspan><tspan>}</tspan>}<tspan>}</tspan>}  <tspan>{</tspan><tspan>{</tspan>{<tspan>{</tspan>{ <tspan>}</tspan><tspan>}</tspan>}<tspan>}</tspan>}  <tspan>{</tspan><tspan>{</tspan>{<tspan>{</tspan>{ <tspan>}</tspan><tspan>}</tspan>}<tspan>}</tspan>}  <tspan>{</tspan><tspan>{</tspan>{<tspan>{</tspan>{ <tspan>}</tspan><tspan>}</tspan>}<tspan>}</tspan>}  <tspan>{</tspan><tspan>{</tspan>{<tspan>{</tspan>{ <tspan>}</tspan><tspan>}</tspan>}<tspan>}</tspan>}  </textPath></text>
-    <text dy="70" textLength="1250"><textPath textLength="1250" href="#circle4">   ../../    ../../    ../../   ../../    ../../    ../../   ../../</textPath></text>
-    <text dy="70" textLength="1005"><textPath textLength="1005" href="#circle5"><tspan>&lt;&gt;</tspan>&lt;/&gt;<tspan>&lt;&gt;</tspan>&lt;/&gt;<tspan>&lt;&gt;</tspan>&lt;/&gt;<tspan>&lt;&gt;</tspan>&lt;/&gt;<tspan>&lt;&gt;</tspan>&lt;/&gt;<tspan>&lt;&gt;</tspan>&lt;/&gt;<tspan>&lt;&gt;</tspan>&lt;/&gt;<tspan>&lt;&gt;</tspan>&lt;/&gt;<tspan>&lt;&gt;</tspan>&lt;/&gt;<tspan>&lt;&gt;</tspan>&lt;/&gt;<tspan>&lt;&gt;</tspan>&lt;/&gt;<tspan>&lt;&gt;</tspan>&lt;/&gt;<tspan>&lt;&gt;</tspan>&lt;/&gt;<tspan>&lt;&gt;</tspan>&lt;/&gt;<tspan>&lt;&gt;</tspan>&lt;/&gt;<tspan>&lt;&gt;</tspan>&lt;/&gt;</textPath></text>
+
+    <g class="motion-layer">
+        <g class="spin-clock"><text class="ring-text ring-1 ring-anim" dy="5"><textPath href="#circle1" textLength="2010">/// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///</textPath></text></g>
+        <g class="spin-counter"><text class="ring-text ring-2 ring-anim" dy="5"><textPath href="#circle2" textLength="1760">++++++++ ++++++++ ++++++++ ++++++++ ++++++++ ++++++++</textPath></text></g>
+        <g class="spin-clock"><text class="ring-text ring-3 ring-anim" dy="5"><textPath href="#circle3" textLength="1500">{{{{{ }}}}} {{{{{ }}}}} {{{{{ }}}}} {{{{{ }}}}} {{{{{ }}}}}</textPath></text></g>
+        <g class="spin-counter"><text class="ring-text ring-4 ring-anim" dy="5"><textPath href="#circle4" textLength="1250">../../ ../../ ../../ ../../ ../../ ../../ ../../ ../../</textPath></text></g>
+        <g class="spin-clock"><text class="ring-text ring-5 ring-anim" dy="5"><textPath href="#circle5" textLength="1005">&lt;/&gt; &lt;/&gt; &lt;/&gt; &lt;/&gt; &lt;/&gt; &lt;/&gt; &lt;/&gt; &lt;/&gt; &lt;/&gt; &lt;/&gt; &lt;/&gt; &lt;/&gt;</textPath></text></g>
+    </g>
 </svg>

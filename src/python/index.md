@@ -14,12 +14,12 @@ PyCharm 是一款强大的 Python 集成开发环境（IDE），提供代码提�
 
 ### 命令行安装（macOS）
 
-````bash
+```bash
 brew install python
+
 python -V  # 查看 Python 版本
 python --version # 查看 Python 版本
 
-```bash
 touch test.py
 echo "print('hello python')" > test.py
 
@@ -27,20 +27,30 @@ python test.py  # 运行文件
 ```
 
 ### 虚拟环境
+
 Python 虚拟环境是一种隔离的 Python 环境，可以在不同的项目中使用不同的 Python 版本和库。
 
-```bash
-# 创建虚拟环境
+::: code-group
+
+```bash [创建虚拟环境]
 python3 -m venv .venv
-# 激活 .venv 虚拟环境
-➜  PyCharmMiscProject source .venv/bin/activate
-(.venv) ➜  PyCharmMiscProject
 ```
+
+```bash [激活 .venv 虚拟环境]
+source .venv/bin/activate
+```
+
+:::
 
 ## pip
 
+查找、安装并发布带有 Python 包索引的 Python 包
+
+[https://pypi.org/](https://pypi.org/)
+
 ```bash
 pip install <package_name>   # 安装指定的包
+# 包位置 .venv/lib/python3.9/site-packages
 pip uninstall <package_name> # 卸载指定的包
 pip list                     # 列出已安装的包
 pip show <package_name>    # 查看指定包的信息
@@ -51,11 +61,15 @@ pip install -r requirements.txt # 从 requirements.txt 文件安装包
 ### 注释
 
 - 单行注释
-- 多行注
+- 多行注释
 
-```py
+::: code-group
+
+```py [单行注释]
 # 1. 单行注释
+```
 
+```py [多行注释]
 '''
 2.1
 多行注释1
@@ -359,17 +373,17 @@ oct(x)          # 将整数转换为八进制字符串
     type()
     isinstance()
 
-### 数据运算
+### 数据运算 `+ - * /`
 
-##### `+ - * /`
-
-    +   # 加法
-    -   # 减法
-    *   # 乘法
-    /   # 除法，得到一个浮点数
-    //  # 除法，得到一个整数
-    %   # 取余
-    **  # 乘方
+| 符号 | 解释                 |
+| ---- | -------------------- |
+| `+`  | 加法                 |
+| `-`  | 减法                 |
+| `*`  | 乘法                 |
+| `/`  | 除法，得到一个浮点数 |
+| `//` | 除法，得到一个整数   |
+| `%`  | 取余                 |
+| `**` | 乘方                 |
 
 ### 成员运算符
 
@@ -377,18 +391,19 @@ oct(x)          # 将整数转换为八进制字符串
 `not in` 如果在序列中没有找到值返回 True，否则返回 False "x" not in
 
 ### 运算符优先级
+| 符号                                                    | 解释                             |
+| ------------------------------------------------------- | -------------------------------- |
+| `()`                                                    | 括号                             |
+| `**`                                                    | 幂                               |
+| `*` `/` `//` `%`                                        | 乘法 除法 整除 取余              |
+| `+` `-`                                                 | 加法 减法                        |
+| `<<` `>>`                                               | 位移                             |
+| `&`                                                     | 按位与                           |
+| `^`                                                     | 按位异或                         |
+| `\|`                                                    | 按位或                           |
+| `==` `!=` `>` `<` `>=` `<=` `is` `is not` `in` `not in` | 比较运算符 身份运算符 成员运算符 |
+| `not`                                                   | 逻辑非                           |
+| `and`                                                   | 逻辑与                           |
+| `or`                                                    | 逻辑或                           |
+| `=`                                                     | 赋值运算符                       |
 
-() (括号)
-** (幂)
-*, /, //, % (乘法, 除法, 整除, 取余)
-+, - (加法, 减法)
-<<, >> (位移)
-& (按位与)
-^ (按位异或)
-| (按位或)
-==, !=, >, <, >=, <=, is, is not, in, not in (比较运算符, 身份运算符, 成员运算符)
-not (逻辑非)
-and (逻辑与)
-or (逻辑或)
-= (赋值运算符)
-````

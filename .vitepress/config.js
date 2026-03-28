@@ -159,8 +159,16 @@
                     "collapsed": false,
                     "items": [
                         {
+                            "text": "about",
+                            "link": "/AI/about"
+                        },
+                        {
                             "text": "index",
                             "link": "/AI/index"
+                        },
+                        {
+                            "text": "ollama",
+                            "link": "/AI/ollama"
                         }
                     ]
                 }
@@ -529,6 +537,18 @@
                     ]
                 }
             ],
+            "/nestjs/": [
+                {
+                    "text": "nestjs",
+                    "collapsed": false,
+                    "items": [
+                        {
+                            "text": "index",
+                            "link": "/nestjs/index"
+                        }
+                    ]
+                }
+            ],
             "/node/": [
                 {
                     "text": "node",
@@ -645,6 +665,10 @@
                         {
                             "text": "jieba",
                             "link": "/python/jieba"
+                        },
+                        {
+                            "text": "requests",
+                            "link": "/python/requests"
                         },
                         {
                             "text": "wordcloud",

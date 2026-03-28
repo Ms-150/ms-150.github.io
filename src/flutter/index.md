@@ -43,6 +43,7 @@ flutter upgrade
 flutter run
   r # reload
   R # restart
+  v # Open DevTools
 
 # 查看可用的设备
 flutter devices

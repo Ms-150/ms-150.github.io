@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "jsbarcode": "^3.12.3",
-    "vue": "^3.5.30"
+    "vue": "^3.5.31"
   },
   "author": "🌕🌖🌗🌘🌑🌒🌓🌔",
   "license": "MIT"

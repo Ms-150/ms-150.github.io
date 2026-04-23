@@ -39,7 +39,7 @@ GET /index.html HTTP/1.1
 | `User-Agent`      | 标识发出请求的客户端应用程序                                   |                              |
 | `Accept`          | 指定客户端能够接受的内容类型（如 text/html、application/json） |                              |
 | `Accept-Encoding` | 指定客户端能够接受的内容编码类型，例如 gzip, deflate。         |
-| `Content-Type`    | 请求体中数据的类型 ｜                                          | [详见](#请求体-content-type) |
+| `Content-Type`    | 请求体中数据的类型 |                                          | [详见](#请求体-content-type) |
 | `Authorization`   | 包含认证信息（如令牌或凭证）                                   |                              |
 | `Cookie`          | 向服务器发送存储在客户端的 cookies。                           |
 | `Referer`         | 指示请求的来源页面的 URL。                                     |

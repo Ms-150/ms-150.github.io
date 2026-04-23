@@ -411,6 +411,10 @@
                             "link": "/js/blob"
                         },
                         {
+                            "text": "class-validator",
+                            "link": "/js/class-validator"
+                        },
+                        {
                             "text": "cross-domain",
                             "link": "/js/cross-domain"
                         },
@@ -563,6 +567,10 @@
                             "link": "/node/browser-sync"
                         },
                         {
+                            "text": "cheerio",
+                            "link": "/node/cheerio"
+                        },
+                        {
                             "text": "cli",
                             "link": "/node/cli"
                         },
@@ -669,6 +677,10 @@
                         {
                             "text": "requests",
                             "link": "/python/requests"
+                        },
+                        {
+                            "text": "uv",
+                            "link": "/python/uv"
                         },
                         {
                             "text": "wordcloud",

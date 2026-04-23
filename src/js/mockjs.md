@@ -122,7 +122,7 @@ useEffect(() => {
 Mock.mock(rurl,rtype?,template|function(options))
 rurl 要拦截的 url 地址
 rtype 拦截的 Ajax 的请求方式 get|post
-template ｜ function(options) 模版数据｜生成响应数据的函数
+template | function(options) 模版数据 | 生成响应数据的函数
 
 模版定义规范
 数据模版定义 DTD,数据占位符定义

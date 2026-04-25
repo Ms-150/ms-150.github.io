@@ -3,7 +3,8 @@
     <div class="input-container">
       <textarea
         v-model="barcodeText"
-        placeholder="请输入条形码内容，每行一个"
+        placeholder="请输入条形码内容，每行一个…"
+        aria-label="条形码内容输入"
         @keydown.ctrl.enter="generateBarcodes"
         @blur="generateBarcodes"
         class="input-field"

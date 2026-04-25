@@ -2,9 +2,11 @@
   <div class="container">
     <h1>摄像头视频预览</h1>
     <div class="video-container">
-      <video ref="video" autoplay class="video"></video>
+      <video ref="video" autoplay muted playsinline class="video"></video>
       <div class="button-group">
-        <button @click="startRecording" :disabled="isRecording" class="btn">开始录制</button>
+        <button @click="startRecording" :disabled="isRecording || isStarting" class="btn">
+          {{ isStarting ? '正在请求权限…' : '开始录制' }}
+        </button>
         <button @click="stopRecording" :disabled="!isRecording" class="btn">停止录制</button>
       </div>
     </div>
@@ -129,3 +131,4 @@ h1 {
   border-radius: 8px;
 }
 </style>
+e>

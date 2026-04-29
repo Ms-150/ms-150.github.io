@@ -163,8 +163,16 @@
                             "link": "/AI/about"
                         },
                         {
+                            "text": "huggingface",
+                            "link": "/AI/huggingface"
+                        },
+                        {
                             "text": "index",
                             "link": "/AI/index"
+                        },
+                        {
+                            "text": "llama.cpp",
+                            "link": "/AI/llama.cpp"
                         },
                         {
                             "text": "ollama",
@@ -429,6 +437,10 @@
                         {
                             "text": "faker",
                             "link": "/js/faker"
+                        },
+                        {
+                            "text": "jsBarcode",
+                            "link": "/js/jsBarcode"
                         },
                         {
                             "text": "loadtest",
@@ -829,6 +841,22 @@
                         {
                             "text": "yaml",
                             "link": "/util/yaml"
+                        }
+                    ]
+                }
+            ],
+            "/web3/": [
+                {
+                    "text": "web3",
+                    "collapsed": false,
+                    "items": [
+                        {
+                            "text": "index",
+                            "link": "/web3/index"
+                        },
+                        {
+                            "text": "solidity",
+                            "link": "/web3/solidity"
                         }
                     ]
                 }

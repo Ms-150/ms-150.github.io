@@ -4,22 +4,18 @@
         .mandala {
             transform-origin: center;
             overflow: visible;
-            /* 关键优化：让层叠处产生加亮效果 */
             mix-blend-mode: screen;
         }
 
         .ring-text {
             font-family: 'Courier New', monospace;
             font-weight: 600;
-            font-size: 14px;
-            /* 稍微拉开字间距，增加呼吸感 */
+            font-size: 30px; /* ← 已放大 */
             letter-spacing: 1px;
             fill: #ff3355;
-            /* 优化发光效果，使其更贴合文字边缘 */
             filter: drop-shadow(0 0 2px rgba(255, 51, 85, 0.4));
         }
 
-        /* 维持原有的极慢旋转 */
         .spin-clock {
             transform-origin: 337.5px 337.5px;
             animation: rotate-clock 120s linear infinite;
@@ -30,7 +26,6 @@
             animation: rotate-counter 140s linear infinite;
         }
 
-        /* 纯透明度呼吸律动 */
         .ring-anim {
             animation: pulse 12s ease-in-out infinite;
         }

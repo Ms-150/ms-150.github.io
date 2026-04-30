@@ -52,6 +52,10 @@ jobs:
         run: pnpm install # 或 pnpm install / yarn install / bun install
 
       - name: Build with VitePress
+        env:
+          # 将 GitHub 中的 Secret 映射为构建环境的环境变量
+          VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: pnpm run docs:build # 或 pnpm docs:build / yarn docs:build / bun run docs:build
 
       - name: Upload artifact

@@ -1,6 +1,10 @@
+import { defineConfig } from "vitepress";
+import path from "path";
+import { fileURLToPath } from "url";
 
-    import { defineConfig } from "vitepress";
-    export default defineConfig({
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+export default defineConfig({
     "lang": "zh-CN",
     "head": [
         [
@@ -899,7 +903,7 @@
         "envDir": "../",
         "resolve": {
             "alias": {
-                "@": "/Users/bn/Documents/ms/ms-150.github.io/src"
+                "@": path.resolve(__dirname, "../src")
             }
         }
     }

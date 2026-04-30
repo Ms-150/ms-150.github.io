@@ -63,21 +63,31 @@ const sidebar = generateSidebarConfig();
 
 const configPath = path.join(__dirname, ".vitepress", "config.js");
 
-// 清除原有的 sidebar 内容
-config.themeConfig.sidebar = {};
-
 // 更新 sidebar 内容
 config.themeConfig.sidebar = sidebar;
 
-// 将更新后的配置写回 .js 文件
-const updatedConfigContent = `
-    import { defineConfig } from "vitepress";
-    export default defineConfig(${JSON.stringify(config, null, 4)});
+// 1. 设置占位符，防止别名被序列化为硬编码的绝对路径
+config.vite.resolve.alias["@"] = "ALIAS_PATH_PLACEHOLDER";
+
+// 2. 序列化配置对象
+let configJson = JSON.stringify(config, null, 4);
+
+// 3. 将占位符替换为动态路径解析代码
+configJson = configJson.replace('"ALIAS_PATH_PLACEHOLDER"', 'path.resolve(__dirname, "../src")');
+
+// 4. 将更新后的配置写回 .js 文件
+const updatedConfigContent = `import { defineConfig } from "vitepress";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+export default defineConfig(${configJson});
 `;
 
 fs.writeFileSync(configPath, updatedConfigContent, "utf-8");
 
 console.log(
     new Date().toLocaleTimeString() +
-    "config.js has been updated with the new sidebar."
+    " config.js has been updated with the new sidebar."
 );

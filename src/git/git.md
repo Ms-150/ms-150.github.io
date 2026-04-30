@@ -90,12 +90,14 @@ git commit -m "删除文件"  # 提交删除操作到版本库
 
 ```bash
 git rm --cached <文件名>
+# --cached 仅从 Git 仓库/暂存区中删除追踪记录，不会删除你本地硬盘上的 .env 文件。
 ```
 
 ::: warning
 从 Git 索引中移除已经追踪的文件
 仅仅修改 `.gitignore` 并不会使 Git 停止跟踪已经被添加到版本控制中的文件。
 你需要使用 `git rm --cached` 命令从 Git 索引中移除这些文件，但文件本身仍然会保留在你的工作区。
+如：git rm --cached .env
 :::
 
 ## 远程仓库

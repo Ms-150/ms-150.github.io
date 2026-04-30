@@ -163,6 +163,10 @@
                             "link": "/AI/about"
                         },
                         {
+                            "text": "geminicli",
+                            "link": "/AI/geminicli"
+                        },
+                        {
                             "text": "huggingface",
                             "link": "/AI/huggingface"
                         },
@@ -890,5 +894,13 @@
     "srcExclude": [
         "**/public/**"
     ],
-    "ignoreDeadLinks": true
+    "ignoreDeadLinks": true,
+    "vite": {
+        "envDir": "../",
+        "resolve": {
+            "alias": {
+                "@": "/Users/bn/Documents/ms/ms-150.github.io/src"
+            }
+        }
+    }
 });

@@ -115,3 +115,5 @@ const c = a.plus(b);
 
 console.log(c.toString()); // 0.3
 ```
+
+![alt text](</decimal.png>)

@@ -447,6 +447,10 @@ export default defineConfig({
                             "link": "/js/faker"
                         },
                         {
+                            "text": "index",
+                            "link": "/js/index"
+                        },
+                        {
                             "text": "jsBarcode",
                             "link": "/js/jsBarcode"
                         },
@@ -773,6 +777,18 @@ export default defineConfig({
                     ]
                 }
             ],
+            "/test/": [
+                {
+                    "text": "test",
+                    "collapsed": false,
+                    "items": [
+                        {
+                            "text": "playwright",
+                            "link": "/test/playwright"
+                        }
+                    ]
+                }
+            ],
             "/uniapp/": [
                 {
                     "text": "uniapp",
@@ -901,6 +917,7 @@ export default defineConfig({
     "ignoreDeadLinks": true,
     "vite": {
         "envDir": "../",
+        "publicDir": "../public",
         "resolve": {
             "alias": {
                 "@": path.resolve(__dirname, "../src")

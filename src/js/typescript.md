@@ -475,7 +475,7 @@ const r: Response = { data: 'ok' }; // T 默认 string
  
 :::
 
-#### keyof 提取对象的属性名
+#### keyof 类型操作符 提取对象的属性名
 
 `keyof` 会把某个对象类型的所有键名，收集成一个联合类型。它是 TypeScript 类型系统里最常用的操作符之一。
 
@@ -652,7 +652,7 @@ isInObject({ a: 1, y: "yyy" });
 
 :::
 
-- ### `typeof` 从“值”反推“类型”
+- ### `typeof` 类型推导 从“值”反推“类型”
 
 ::: code-group
 

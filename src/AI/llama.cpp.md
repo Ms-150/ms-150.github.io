@@ -42,13 +42,12 @@ llama-cli -hf unsloth/Qwen3.5-9B-GGUF:UD-Q4_K_XL
 ```
 
 ```bash [运行模型]
-llama-cli -m qwen2.5-3b-instruct-q4_k_m.gguf
-
+llama-cli -m unsloth/Qwen3.5-9B-GGUF:UD-Q4_K_XL
 ```
 
 ```bash [启用 GPU 加速（Apple Silicon）]
 # -ngl 999 = 尽可能多地把层放到 GPU。
-llama-cli -m qwen2.5-3b-instruct-q4_k_m.gguf -ngl 999
+llama-cli -m unsloth/Qwen3.5-9B-GGUF:UD-Q4_K_XL -ngl 999
 ```
 
 ```bash [查看本地的模型]

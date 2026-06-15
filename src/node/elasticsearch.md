@@ -5,8 +5,175 @@
 
 [https://www.elastic.co/](https://www.elastic.co/)
 
-## install
+## 本质
 
+一个“超强搜索数据库”
+
+## 擅长
+
++ 全文搜索
++ 海量数据检索
++ 模糊搜索
++ 日志分析
++ 聚合统计
++ 实时查询
+
+## 底层核心：
+
++ 倒排索引（Inverted Index）
++ 全文检索
+
+全文检索：从一大段文本里找“相关内容”
+倒排索引：全文检索的核心数据结构
+
+::: code-group
+
+```text [正向索引]
+文档1 -> 苹果 手机
+文档2 -> 华为 手机
+文档3 -> 小米 手机
+
+文档 → 内容
+```
+
+```text [倒排索引]
+苹果 -> 文档1
+华为 -> 文档2
+小米 -> 文档3
+手机 -> 文档1、2、3
+
+词 → 文档
+```
+
+:::
+
+| MySQL           | Elasticsearch |
+| --------------- | ------------- |
+| Database 数据库 | Index 索引    |
+| Row 行数据      | Document 文档 |
+| Column 字段     | Field 字段    |
+| Schema 表结构   | Mapping 映射  |
+| SQL             | DSL JSON 查询 |
+
+::: code-group
+
+```bash [mysql]
+# 数据库 -> 表 -> 行
+
+Database(mall)
+    └── Table(product)
+            ├── Row1
+            ├── Row2
+            └── Row3
+```
+
+```bash [elasticsearch]
+# 索引 -> JSON文档
+
+Index(product)
+    ├── Document1(JSON)
+    ├── Document2(JSON)
+    └── Document3(JSON)
+```
+
+:::
+
+### mapping 字段规则配置
+
+```bash
+PUT /product
+{
+  "mappings": {
+        "properties": {
+            "title": {
+                "type": "text",
+                "analyzer": "ik_max_word"
+            },
+            "status": {
+                "type": "keyword"
+            },
+            "price": {
+                "type": "float"
+            },
+            "created_at": {
+                "type": "date"
+            }
+        }
+    }
+}
+
+# mappings 
+#     properties 字段
+#         title 字段名
+#             type  索引类型
+#             analyzer 分词器
+```
+
+| type      | 是否分词 | 适合场景   | 示例             |
+| --------- | -------- | ---------- | ---------------- |
+| `text`    | 是       | 全文搜索   | 标题、文章内容   |
+| `keyword` | 否       | 精确匹配   | ID、状态、手机号 |
+| `integer` | 否       | 整数       | 年龄、数量       |
+| `long`    | 否       | 长整数     | 大数字ID         |
+| `float`   | 否       | 小数       | 商品价格         |
+| `double`  | 否       | 高精度小数 | 金额统计         |
+| `boolean` | 否       | true/false | 是否启用         |
+| `date`    | 否       | 日期时间   | 创建时间         |
+| `ip`      | 否       | IP地址     | 服务器IP         |
+| `nested`  | 否       | 嵌套对象   | 商品规格         |
+| `object`  | 否       | JSON对象   | 用户信息         |
+
+| analyzer      | 说明             | 适合语言 | 特点           |
+| ------------- | ---------------- | -------- | -------------- |
+| `standard`    | 默认分词器       | 英文     | ES 自带        |
+| `simple`      | 简单分词         | 英文     | 按非字母拆分   |
+| `whitespace`  | 空格分词         | 英文     | 遇空格切       |
+| `stop`        | 去停用词         | 英文     | 去掉 the/a/is  |
+| `keyword`     | 不分词           | 全部     | 整句作为一个词 |
+| `ik_max_word` | 最细粒度中文分词 | 中文     | 搜索效果强     |
+| `ik_smart`    | 智能中文分词     | 中文     | 分词较粗       |
+
+### settings 索引性能配置
+
+```bash
+PUT /product
+{
+    "settings": {
+        "number_of_shards": 3, # 分片数
+        "number_of_replicas": 1 # 副本数
+    },
+    "mappings": {
+        "properties": {
+            "title": {
+                "type": "text",
+                "analyzer": "ik_max_word"
+            },
+            "price": {
+                "type": "float"
+            },
+            "status": {
+                "type": "keyword"
+            }
+        }
+    }
+}
+
+# number_of_shards 分片数
+# number_of_replicas 副本数
+```
+
+| setting              | 作用       | 是否常用 | 是否可修改 |
+| -------------------- | ---------- | -------- | ---------- |
+| `number_of_shards`   | 主分片数   | ⭐⭐⭐⭐⭐    | ❌          |
+| `number_of_replicas` | 副本数     | ⭐⭐⭐⭐⭐    | ✅          |
+| `refresh_interval`   | 刷新间隔   | ⭐⭐⭐⭐     | ✅          |
+| `max_result_window`  | 最大分页   | ⭐⭐⭐      | ✅          |
+| `analysis`           | 分词器配置 | ⭐⭐⭐⭐⭐    | ⚠️          |
+| `routing`            | 路由规则   | ⭐⭐       | ⚠️          |
+
+
+## install
+ 
 ::: code-group
 
 ```bash
@@ -19,7 +186,175 @@ docker run -d --name es \
 # 关闭 https   -e "xpack.security.enabled=false" \ 
 ```
 
+## usage
+
 :::
+
+::: code-group
+
+```bash [创建索引]
+PUT /product
+{
+  "mappings": {
+        "properties": {
+            "title": {
+                "type": "text"
+            },
+            "price": {
+                "type": "float"
+            }
+        }
+    }
+}
+```
+
+```bash [插入数据]
+POST /product/_doc/1
+{
+    "title": "iPhone 15 Pro",
+    "price": 7999
+}
+```
+
+```bash [查询数据]
+GET /product/_search
+{
+  "query": {
+        "match": {
+            "title": "iphone"
+        }
+    }
+}
+```
+
+:::
+
+### 索引
+
+```bash
+Index
+ ├── settings
+ ├── mappings
+ ├── aliases
+ └── documents
+```
+
+::: code-group
+
+```bash [创建索引]
+PUT /product
+```
+
+```bash [删除索引]
+# 整个索引 + 所有数据
+DELETE /product
+```
+
+```bash [修改索引]
+# mapping / setting 都是部分可以修改
+
+# 修改 mapping 
+PUT /product/_mapping
+
+# 修改 setting
+PUT /product/_settings
+```
+
+```bash [查询索引]
+GET /product
+```
+
+:::
+
+#### aliases 索引别名
+给索引起一个“虚拟名字”
+
+##### 为什么需要 Alias？
+
+ES 的索引很多配置：不能直接修改。 别名用来 `重建索引`
+
+例如：
++ mapping
++ analyzer
++ shards
+
+优势
+1. 索引平滑升级
+2. 无感知切换
+3. 零停机迁移
+
+product 【Alias】
+   ↓
+product_v1 【Index】
+
+::: code-group
+
+```bash [创建索引别名]
+PUT /product_v1
+{
+  "aliases": {
+    "product": {}
+  }
+}
+```
+
+```bash [查询索引别名]
+GET /_alias
+```
+
+```bash [切换别名]
+POST /_aliases
+{
+  "actions": [
+    {
+      "remove": {
+        "index": "product_v1",
+        "alias": "product"
+      }
+    },
+    {
+      "add": {
+        "index": "product_v2",
+        "alias": "product"
+      }
+    }
+  ]
+}
+```
+
+:::
+
+### 文档
+
+::: code-group
+
+```bash [创建文档]
+POST /product/_doc/1
+{
+  "title": "iPhone 15 Pro",
+  "price": 7999
+}
+```
+
+```bash [删除文档]
+DELETE /product/_doc/1
+```
+
+```bash [修改文档]
+POST /product/_update/1
+{
+  "doc": {
+    "price": 8999
+  }
+}
+```
+
+```bash [查询文档]
+GET /product/_doc/1
+```
+
+:::
+
 
 # Kibana
 

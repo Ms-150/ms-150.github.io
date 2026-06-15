@@ -65,7 +65,8 @@ gemini
 @src/utils/ 检查过时的 API
 ```
 
-```.geminiignore [ignore]
+``` [ignore]
+.geminiignore
 # 敏感文件忽视
 
 .env
@@ -77,3 +78,4 @@ private-notes.md
 
 ### Skills
 
+ 
